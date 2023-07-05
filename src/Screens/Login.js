@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useState, Keyboard} from 'react';
 import {
   Text,
   View,
@@ -20,74 +20,85 @@ function Login() {
 
   const [validSignIn, setVaildSignIn] = useState(false);
   const navigation = useNavigation();
+  // console.log(password)
 
-  const validateLoginPage = () => {
-    const validateSignIn = validEamil && validPassword;
-    if (validateSignIn) {
-      setVaildSignIn(validateSignIn);
-      navigation.navigate('Home');
-    }
-    setVaildSignIn(false);
-  };
-
-  const checkPass = e => {
-    const minLength = 6;
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasLowercase = /[a-z]/.test(password);
-    const hasNumber = /\d/.test(password);
-
-    const isValid = hasUppercase && hasLowercase && hasNumber;
-    setValidPassword(isValid);
-    if (isValid) {
-      setPassword('');
-    }
-  };
-
-  const validateEmail = () => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    const isValid = emailRegex.test(email);
-    setValidEmail(isValid);
-    if (isValid) {
-      setEmail('');
-    }
+  const gotoSignup = () => {
+    navigation.navigate('Signup');
   };
 
   const handleClick = () => {
-    validateEmail();
-    checkPass();
-    validateLoginPage();
-
-    // setEmail('');
-    // setPassword('');
+    if (email !== '') {
+      setValidEmail(false);
+    } else if (password !== '') {
+      setValidPassword(false);
+    } else {
+      setValidEmail(true);
+      setPassword(true);
+      // navigation.navigate("Product")
+    }
   };
 
   return (
     <View style={styles.login}>
       <Image source={{uri: imageUrl}} style={styles.logo} />
       <View style={styles.loginContainer}>
+        <Text
+          style={{
+            color: 'black',
+            textAlign: 'center',
+            fontSize: 22,
+            fontWeight: '700',
+            marginBottom: 10,
+          }}>
+          Log In
+        </Text>
         <Text style={styles.label}>Mail Id</Text>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Enter Your Mail"
-          value={email}
-          onChangeText={e => {
-            setEmail(e);
-            setValidEmail(true);
-          }}
-        />
+
+        <View style={styles.input}>
+          <Image
+            source={require('../Images/e.png')}
+            style={{width: 20, height: 20}}
+          />
+          <TextInput
+            placeholder="Enter Your Mail"
+            placeholderTextColor={'black'}
+            style={{
+              height: 50,
+              paddingLeft: 15,
+              opacity: 0.5,
+              fontSize: 15,
+              width: '100%',
+              color: 'black',
+            }}
+            onChange={e => setEmail(e)}
+          />
+        </View>
 
         {!validEamil && (
           <Text style={styles.errorText}>Invalid email address</Text>
         )}
 
         <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.inputStyle}
-          secureTextEntry={true}
-          placeholder="Enter Your Password"
-          value={password}
-          onChangeText={e => setPassword(e)}
-        />
+        <View style={styles.input}>
+          <Image
+            source={require('../Images/p.png')}
+            style={{width: 20, height: 20}}
+          />
+          <TextInput
+            placeholder="Enter Your Password"
+            secureTextEntry={true}
+            placeholderTextColor={'black'}
+            style={{
+              height: 50,
+              paddingLeft: 15,
+              fontSize: 15,
+              width: '100%',
+              opacity: 0.5,
+              color: 'black',
+            }}
+            onChange={e => setPassword(e)}
+          />
+        </View>
 
         {!validPassword && (
           <Text style={styles.errorText}>
@@ -103,6 +114,12 @@ function Login() {
           <Text style={styles.errorText}>Log In Successfully</Text>
         )}
       </View>
+      <Text style={{color: 'black', marginTop: 15, fontSize: 16}}>
+        --- New to Amazon? ---
+      </Text>
+      <TouchableOpacity style={styles.regBtn} onPress={gotoSignup}>
+        <Text style={styles.regText}>Create Your Amazon Account</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -142,12 +159,14 @@ const styles = StyleSheet.create({
     margin: 'auto',
   },
   loginContainer: {
-    width: 300,
-    height: 300,
+    width: '90%',
+    // height: 300,
     borderWidth: 2,
     borderColor: 'darkgrey',
     borderRadius: 15,
     padding: 15,
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   inputStyle: {
     width: '98%',
@@ -156,11 +175,13 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginBottom: 10,
     borderRadius: 10,
-    fontSize: 18,
+    fontSize: 22,
+    textShadowColor: 'black',
   },
   label: {
     fontSize: 20,
     marginBottom: 5,
+    color: 'black',
   },
   buttons: {
     backgroundColor: 'black',
@@ -176,6 +197,36 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
+  },
+  regBtn: {
+    marginTop: 15,
+    borderWidth: 0.7,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    height: 45,
+    borderRadius: 12,
+    display: 'flex',
+    justifyContent: 'center',
+    width: '80%',
+    backgroundColor: 'transparent',
+  },
+  regText: {
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 17,
+  },
+  input: {
+    borderWidth: 0.5,
+    borderStyle: 'solid',
+    // height:50,
+    borderRadius: 15,
+    display: 'flex',
+    // justifyContent:"center",
+    paddingLeft: 10,
+    paddingRight: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    color: 'black',
   },
 });
 
