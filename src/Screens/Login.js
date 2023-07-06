@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState, Keyboard} from 'react';
 import {
@@ -13,30 +14,71 @@ const imageUrl =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png';
 
 function Login() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [validEamil, setValidEmail] = useState(true);
-  const [validPassword, setValidPassword] = useState(true);
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [badEmail, setBadEmail] = useState(false);
+  const [badPassword, setBadPassword] = useState(false);
   const [validSignIn, setVaildSignIn] = useState(false);
+  const [disable, setDisable] = useState(false);
   const navigation = useNavigation();
-  // console.log(password)
+  const [verifyUser, setVerifyUser] =useState(false)
+  const [securityCheck , setSecurityCheck] = useState(false)
 
   const gotoSignup = () => {
     navigation.navigate('Signup');
   };
 
-  const handleClick = () => {
-    if (email !== '') {
-      setValidEmail(false);
-    } else if (password !== '') {
-      setValidPassword(false);
-    } else {
-      setValidEmail(true);
-      setPassword(true);
-      // navigation.navigate("Product")
+  const validateEmail = () => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const isValid = emailRegex.test(email);
+    setBadEmail(!isValid);
+    if (isValid) {
+      setEmail('');
     }
   };
+  const validatePassword = e => {
+    const minLength = 6;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+
+    const isValid = hasUppercase && hasLowercase && hasNumber;
+    setBadPassword(!isValid);
+    if (isValid) {
+      setPassword('');
+    }
+  };
+  const getData = async ()=>{
+    const mEmail = await AsyncStorage.getItem("EMAILS")
+    const mPassword = await AsyncStorage.getItem("PASSWORD")
+    console.log(mEmail, mPassword)
+    if (mEmail===email){
+      if (mEmail === email && mPassword === password){
+        console.log(true)
+        navigation.navigate("Home")
+      }else{
+        setVerifyUser(false)
+        alert("Wrong Inputs")
+      }
+    }
+
+  }
+
+  const validate = () => {
+    validateEmail();
+    validatePassword();
+    getData()
+  };
+
+  const handleSecurity =()=>{
+    if (securityCheck == true){
+      setSecurityCheck(false)
+    }else{
+      setSecurityCheck(true)
+    }
+  }
+
+ 
 
   return (
     <View style={styles.login}>
@@ -61,6 +103,7 @@ function Login() {
           />
           <TextInput
             placeholder="Enter Your Mail"
+            
             placeholderTextColor={'black'}
             style={{
               height: 50,
@@ -70,11 +113,15 @@ function Login() {
               width: '100%',
               color: 'black',
             }}
-            onChange={e => setEmail(e)}
+            value={email}
+            onChangeText={e => {
+              setEmail(e);
+              // setValidEmail(true);
+            }}
           />
         </View>
 
-        {!validEamil && (
+        {badEmail === true && (
           <Text style={styles.errorText}>Invalid email address</Text>
         )}
 
@@ -86,33 +133,58 @@ function Login() {
           />
           <TextInput
             placeholder="Enter Your Password"
-            secureTextEntry={true}
+            secureTextEntry={securityCheck}
             placeholderTextColor={'black'}
             style={{
               height: 50,
               paddingLeft: 15,
               fontSize: 15,
-              width: '100%',
+              width: '85%',
               opacity: 0.5,
               color: 'black',
             }}
-            onChange={e => setPassword(e)}
+            onPress={handleSecurity}
+            value={password}
+            onChangeText={e => {
+              setPassword(e);
+              // setValidEmail(true);
+              // console.log(e);
+            }}
           />
+           <TouchableOpacity onPress={handleSecurity}>
+              {securityCheck == true ? (
+                <Image
+                  source={require('../Images/hide.png')}
+                  style={{width: 20, height: 20}}
+                />
+              ) : (
+                <Image
+                  source={require('../Images/view.png')}
+                  style={{width: 20, height: 20}}
+                />
+              )}
+            </TouchableOpacity>
         </View>
 
-        {!validPassword && (
+        {badPassword === true && (
           <Text style={styles.errorText}>
             Password must contain at least 6 characters, including uppercase,
             lowercase, and a number
           </Text>
         )}
-        <TouchableOpacity onPress={handleClick}>
+        <TouchableOpacity
+          onPress={() => {
+            validate();
+          }}>
           <Text style={styles.btnEl}>Continue</Text>
         </TouchableOpacity>
-
-        {validSignIn && (
-          <Text style={styles.errorText}>Log In Successfully</Text>
+        {verifyUser=== true && (
+          <Text style={styles.errorText}>
+            Enterd wrong Email and Password
+          </Text>
         )}
+
+        
       </View>
       <Text style={{color: 'black', marginTop: 15, fontSize: 16}}>
         --- New to Amazon? ---

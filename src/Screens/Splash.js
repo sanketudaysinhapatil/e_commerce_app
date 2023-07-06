@@ -11,14 +11,20 @@ const Splash = () => {
       navigation.navigate("Login")
     }, 3000);
   });
-  
+
   // console.log("sank")
+  const handleSplash = () => {
+    navigation.navigate('Login');
+  };
 
   return (
     <View style={styles.bgContainer}>
-      <Image source={require('../Images/playstore.png')} style={styles.image} />
-      <TouchableOpacity>
-        <Text>Log in ss</Text>
+      <TouchableOpacity onPress={handleSplash}>
+      
+        <Image
+          source={require('../Images/playstore.png')}
+          style={styles.image}
+        />
       </TouchableOpacity>
     </View>
   );
