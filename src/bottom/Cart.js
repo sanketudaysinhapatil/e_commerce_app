@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const CommonButton = ({onPress, Title, bgColor}) => {
+const Cart = () => {
   return (
     <View>
-      <Text>CommonButton</Text>
+      <Text>Cart</Text>
     </View>
   )
 }
 
-export default CommonButton
+export default Cart
 
 const styles = StyleSheet.create({})

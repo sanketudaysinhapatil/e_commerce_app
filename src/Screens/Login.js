@@ -10,6 +10,7 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
+
 const imageUrl =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png';
 
@@ -55,6 +56,7 @@ function Login() {
     if (mEmail===email){
       if (mEmail === email && mPassword === password){
         console.log(true)
+      
         navigation.navigate("Home")
       }else{
         setVerifyUser(false)
@@ -192,6 +194,8 @@ function Login() {
       <TouchableOpacity style={styles.regBtn} onPress={gotoSignup}>
         <Text style={styles.regText}>Create Your Amazon Account</Text>
       </TouchableOpacity>
+      
+
     </View>
   );
 }

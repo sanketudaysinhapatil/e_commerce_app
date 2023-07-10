@@ -1,152 +1,214 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import Products from '../components/Products';
-import AppHeader from '../components/Headers';
+import {StyleSheet, Text, View, Image} from 'react-native';
+import React, {useState} from 'react';
+
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import Main from '../bottom/Main';
+import Search from '../bottom/Search';
+import Wishlist from '../bottom/Wishlist';
+import Profile from '../bottom/Profile';
+import Cart from '../bottom/Cart';
 
 
-
-
-
-
-const HomeBanner = () => { 
+const Home = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+  console.log(selectedTab);
   return (
-    <ScrollView style={{backgroundColor:"#134554"}}>
-        <AppHeader/>
-      <View style={styles.backdropImage}>
-        <Image style={styles.img} source={require("../Images/1.jpg")} />
-      </View>
-       
-    <View style={styles.herobanner}>
-      
+    <View style={{flex: 1}}>
+    
 
-      <View style={styles.herobannerContent}>
-        <Text
+      {selectedTab === 0 ? (
+        <Main />
+      ) : selectedTab === 1 ? (
+        <Search />
+      ) : selectedTab === 2 ? (
+        <Cart />
+      ) : selectedTab === 3 ? (
+        <Wishlist />
+      ) : (
+        <Profile />
+      )}
+      <View
+        style={{
+          width: '100%',
+          height: 70,
+          backgroundColor: 'white',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          flexDirection: 'row',
+        }}>
+        <TouchableOpacity
           style={{
-            color: 'black',
-            textAlign: 'center',
-            fontWeight: '600',
-            marginBottom: 10,
-            fontSize: 30,
-          }}>
-          Welcome
-        </Text>
-        <Text
-          style={{
-            color: 'black',
-            textAlign: 'center',
-            fontWeight: '400',
-            marginBottom: 10,
-            fontSize: 21,
-          }}>
-          Discover the Best Deals and Exclusive Offers...
-        </Text>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
+            // width: '20%',
+            height: '100%',
             justifyContent: 'center',
-            width: '100%',
+            alignItems: 'center',
+            // flex:1,
+            borderColor: selectedTab == 0 ? '#77bfea' : 'white',
+            borderWidth: 15,
+            borderStyle: 'solid',
+            borderTopWidth: 5,
+            borderLeftWidth: 0,
+            borderRightWidth: 0,
+            borderBottomWidth: 0,
+            borderRadius: 6,
+          }}
+          onPress={() => {
+            setSelectedTab(0);
           }}>
-          <View style={{width: '60%'}}>
-            <TextInput
-              placeholder="Search Products..."
-              style={{
-                paddingLeft: 10,
-                backgroundColor: 'white',
-                borderTopLeftRadius: 15,
-                borderBottomLeftRadius: 15,
-                width:"100%"
-              }}
-            />
-          </View>
-          <TouchableOpacity style={styles.button}>
-            <Text style={{color: 'white'}}>Click Me</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      
-    </View>
-    <Products/>
-    </ScrollView>
+          <Image
+            source={require('../Images/home.png')}
+            style={{
+              width: 24,
+              height: 24,
+              objectFit: 'contain',
+              tintColor: selectedTab == 0 ? '#77bfea' : 'black',
+            }}
+          />
+        </TouchableOpacity>
 
+        <TouchableOpacity
+          onPress={() => {
+            setSelectedTab(1);
+          }}
+          style={{
+            // width: '20%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            borderColor: selectedTab == 1 ? '#77bfea' : 'white',
+            borderWidth: 15,
+            borderStyle: 'solid',
+            borderTopWidth: 5,
+            borderLeftWidth: 0,
+            borderRightWidth: 0,
+            borderBottomWidth: 0,
+            borderRadius: 6,
+          }}>
+          <Image
+            source={require('../Images/search.png')}
+            style={{
+              width: 24,
+              height: 24,
+              objectFit: 'contain',
+              tintColor: selectedTab == 1 ? '#77bfea' : 'black',
+            }}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            borderColor: selectedTab == 2 ? '#77bfea' : 'white',
+            borderWidth: 15,
+            borderStyle: 'solid',
+            borderTopWidth: 5,
+            borderLeftWidth: 0,
+            borderRightWidth: 0,
+            borderBottomWidth: 0,
+            borderRadius: 6,
+          }}>
+          <View
+            style={{
+              width: '30',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                setSelectedTab(2);
+              }}
+              style={{
+                width: 40,
+                height: 40,
+                backgroundColor: '#000',
+                borderRadius: 25,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                source={require('../Images/bag.png')}
+                style={{
+                  width: 21,
+                  height: 21,
+                  objectFit: 'contain',
+                  tintColor: selectedTab == 2 ? '#77bfea' : 'white',
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            setSelectedTab(3);
+          }}
+          style={{
+            // width: '20%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            borderColor: selectedTab == 3 ? '#77bfea' : 'white',
+            borderWidth: 15,
+            borderStyle: 'solid',
+            borderTopWidth: 5,
+            borderLeftWidth: 0,
+            borderRightWidth: 0,
+            borderBottomWidth: 0,
+            borderRadius: 6,
+          }}>
+          <Image
+            source={require('../Images/heart.png')}
+            style={{
+              width: 24,
+              height: 24,
+              objectFit: 'contain',
+              tintColor: selectedTab == 3 ? '#77bfea' : 'black',
+            }}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            setSelectedTab(4);
+          }}
+          style={{
+            // width: '20%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            borderColor: selectedTab == 4 ? '#77bfea' : 'white',
+            borderWidth: 15,
+            borderStyle: 'solid',
+            borderTopWidth: 5,
+            borderLeftWidth: 0,
+            borderRightWidth: 0,
+            borderBottomWidth: 0,
+            borderRadius: 6,
+          }}>
+          <Image
+            source={require('../Images/us.png')}
+            style={{
+              width: 24,
+              height: 24,
+              objectFit: 'contain',
+              tintColor: selectedTab == 4 ? '#77bfea' : 'black',
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  herobanner: {
-    width: '100%',
-    height: 220,
-    backgroundColor: ' #1c4b91',
-    display: 'flex',
-    alignItems: 'center',
-    position: 'relative',
+export default Home;
 
-  },
-  mainBannercontent: {
-    display: 'flex',
-    alignItems: 'center',
-    color: 'white',
-    textAlign: 'center',
-    position: 'relative',
-    margin: 0,
-    maxWidth: '80%',
-  },
-  img:{
-    width:"100%",
-    // height:"100%"
-    zIndex:-1,
-    height:400
-
-
-
-  },
-
-  backdropImage: {
-    flex:1,
-
-    height: "100%",
-    // width:"100%",
-    opacity: 0.5,
-    // overflow: 'hidden',
-    // objectFit:"contain",
-    position: 'absolute',
-    resizeMode: 'contain',
-    // resizeMode: 'cover',
-    objectFit:"fill",
-    right:0,
-    bottom:0,
-    top: 0,
-    left: 0,
-
-  },
-  mainBannercontent: {
-    display: 'flex',
-    alignItems: 'center',
-    color: 'red',
-  },
-  button: {
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    // backgroundColor: "#e7622e",
-    borderColor: '#fcfdfb',
-    borderWidth: 0,
-    borderTopRightRadius: 15,
-    borderBottomRightRadius: 15,
-    backgroundColor: '#cd5c5c',
-    width:"20%",
-
-    height: 50,
-  },
-});
-
-export default HomeBanner;
+const styles = StyleSheet.create({});

@@ -97,7 +97,7 @@ function Signup() {
   };
 
   const appendToSignUp = () => {
-    navigation.goBack();
+    navigation.navigate("Login");
   };
 
   const securityCheck = () => {
