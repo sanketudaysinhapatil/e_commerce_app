@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Main from '../bottom/Main';
@@ -8,14 +9,14 @@ import Wishlist from '../bottom/Wishlist';
 import Profile from '../bottom/Profile';
 import Cart from '../bottom/Cart';
 
-
 const Home = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   console.log(selectedTab);
+  const data = useSelector(state => state);
+  console.log(data);
+
   return (
     <View style={{flex: 1}}>
-    
-
       {selectedTab === 0 ? (
         <Main />
       ) : selectedTab === 1 ? (
@@ -135,12 +136,28 @@ const Home = () => {
               <Image
                 source={require('../Images/bag.png')}
                 style={{
-                  width: 21,
-                  height: 21,
+                  width: 18,
+                  height: 18,
                   objectFit: 'contain',
                   tintColor: selectedTab == 2 ? '#77bfea' : 'white',
                 }}
               />
+              <View
+                style={{
+                  width: 20,
+                  height: 20,
+                  backgroundColor: 'red',
+                  borderRadius: 7,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  position: 'absolute',
+                  top: 2,
+                  right: 5,
+                }}>
+                <Text style={{color: '#fff', fontWeight: '600'}}>
+                  {data.Reducers.length}
+                </Text>
+              </View>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
@@ -173,6 +190,22 @@ const Home = () => {
               tintColor: selectedTab == 3 ? '#77bfea' : 'black',
             }}
           />
+          <View
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: 'red',
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'absolute',
+              top: 12,
+              right: -1,
+            }}>
+            <Text style={{color: '#fff', fontWeight: '600'}}>
+              {data.Reducers2.length}
+            </Text>
+          </View>
         </TouchableOpacity>
 
         <TouchableOpacity

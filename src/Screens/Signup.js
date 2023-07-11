@@ -110,7 +110,7 @@ function Signup() {
   const saveData = async () => {
     if (signValid) {
       await AsyncStorage.setItem('NAME', name);
-      await AsyncStorage.setItem('MOBILE', contactNo);
+      await AsyncStorage.setItem('CONTACT', contactNo);
       await AsyncStorage.setItem('EMAILS', email );
       await AsyncStorage.setItem('PASSWORD', password);
       setTimeout(() => {

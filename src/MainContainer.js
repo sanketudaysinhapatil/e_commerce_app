@@ -4,9 +4,9 @@ import AppNavigator from './AppNavigator'
 
 const MainContainer = () => {
   return (
-    <View>
+   
       <AppNavigator/>
-    </View>
+   
   )
 }
 

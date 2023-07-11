@@ -6,6 +6,8 @@ import Splash from './Screens/Splash';
 import Login from './Screens/Login';
 import Home from './Screens/Home';
 import RegisterPage from './Screens/Signup';
+import MyAddress from './Screens/MyAddress';
+import AddAddress from './Screens/AddAddress';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +34,16 @@ const AppNavigator = () => {
           options={{headerShown: false}}
           name="Signup"
           component={RegisterPage}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="MyAddress"
+          component={MyAddress}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="AddAddress"
+          component={AddAddress}
         />
       </Stack.Navigator>
     </NavigationContainer>

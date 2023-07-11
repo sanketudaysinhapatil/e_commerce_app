@@ -2,22 +2,8 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Products = ({item}) => {
-  const [categoriesList, setCategoriesList] = useState([]);
-  const [smartPhones, setSmartPhones] = useState([]);
-  const [fragrance, setFragrance] = useState([]);
-  const [skinCare, setSkinCare] = useState([]);
-  const [groceries, setGroceries] = useState([]);
-  const [homeDecoration, setHomeDecoration] = useState([]);
-
-  useEffect(() => {
-    getData();
-  });
-
-  const getData = () => {
-    fetch('https://dummyjson.com/products').then(res => res.json());
-    // .then(console.log);
-  };
+const Products = ({item, onAddToCart, onAddWishlist}) => {
+ 
   return (
     <View>
       <View
@@ -32,10 +18,7 @@ const Products = ({item}) => {
           backgroundColor: '#fff',
         }}>
         <Image
-         
-          source={{uri:item.image}}
-         
-        
+          source={{uri: item.image}}
           style={{
             width: '100%',
             height: '50%',
@@ -77,7 +60,7 @@ const Products = ({item}) => {
             paddingTop: 10,
           }}>
           <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
-            {"$" + item.price}
+            {'$' + item.price}
           </Text>
           <TouchableOpacity
             style={{
@@ -85,6 +68,9 @@ const Products = ({item}) => {
               borderWidth: 0,
               padding: 10,
               borderRadius: 10,
+            }}
+            onPress={() => {
+              onAddToCart(item);
             }}>
             <Text style={{color: 'white'}}>add to cart</Text>
           </TouchableOpacity>
@@ -105,10 +91,8 @@ const Products = ({item}) => {
 
               justifyContent: 'center',
               alignItems: 'center',
-              // bottom:0,
-              // left:0,
-              // right:0,
-              // zIndex:-1
+            }}  onPress={() => {
+              onAddWishlist(item);
             }}>
             <Image
               source={require('../Images/heart.png')}

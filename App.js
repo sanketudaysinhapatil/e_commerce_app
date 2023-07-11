@@ -1,24 +1,18 @@
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
-import React from 'react'
-import AppNavigator from './src/AppNavigator'
-
+import {StyleSheet, Text, View, StatusBar} from 'react-native';
+import React from 'react';
+import AppNavigator from './src/AppNavigator';
+import { Provider } from 'react-redux';
+import store from './src/redux/store/Store';
+import MainContainer from './src/MainContainer';
 
 const App = () => {
   return (
-    <>    
-    <StatusBar
-        animated={true}
-        backgroundColor="#98e1d6"
-        // barStyle={statusBarStyle}
-        // showHideTransition={statusBarTransition}
-        hidden={false}
-      />
-      <AppNavigator/>
-    </>
+    <Provider store={store}>
+      <MainContainer />
+    </Provider>
+  );
+};
 
-  )
-}
+export default App;
 
-export default App
-
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -6,8 +6,11 @@ import {FlatList, ScrollView} from 'react-native-gesture-handler';
 
 import ScrollImages from '../components/ScrollImages';
 import Products from '../components/Products';
+import {useDispatch, useSelector} from 'react-redux';
+import {addItemToCart, addToWishlist} from '../redux/Actions';
 
 const Main = () => {
+  const dispatch = useDispatch();
   const [phone, setPhones] = useState([]);
   const [datas, setDatas] = useState([]);
   const [laptop, setLaptop] = useState([]);
@@ -25,13 +28,16 @@ const Main = () => {
     // .then(console.log);
   };
 
+  
+  // console.log(items)
+
   return (
-    <ScrollView style={{height: '100%', paddingBottom: 100}}>
+    <ScrollView style={{height: '100%', paddingBottom: 100, flex: 1}}>
       <Headerss />
       <HomeBanner />
 
       <ScrollImages />
-      <View>
+      <View style={{}}>
         <Text
           style={{
             marginBottom: 20,
@@ -39,7 +45,6 @@ const Main = () => {
             color: '#000',
             fontSize: 16,
             fontWeight: '600',
-          
           }}>
           jewelery
         </Text>
@@ -52,7 +57,15 @@ const Main = () => {
             if (item.category === 'jewelery') {
               return (
                 <View style={{}}>
-                  <Products item={item} />
+                  <Products
+                    item={item}
+                    onAddToCart={x => {
+                      dispatch(addItemToCart(item));
+                    }}
+                    onAddWishlist={x => {
+                      dispatch(addToWishlist(item));
+                    }}
+                  />
                 </View>
               );
             }
@@ -60,7 +73,7 @@ const Main = () => {
         />
       </View>
 
-      <View >
+      <View>
         <Text
           style={{
             marginBottom: 20,
@@ -68,7 +81,6 @@ const Main = () => {
             color: '#000',
             fontSize: 16,
             fontWeight: '600',
-            
           }}>
           men's clothing
         </Text>
@@ -81,7 +93,15 @@ const Main = () => {
             if (item.category === "men's clothing") {
               return (
                 <View style={{}}>
-                  <Products item={item} />
+                  <Products
+                    item={item}
+                    onAddToCart={x => {
+                      dispatch(addItemToCart(item));
+                    }}
+                    onAddWishlist={x => {
+                      dispatch(addToWishlist(item));
+                    }}
+                  />
                 </View>
               );
             }
@@ -89,7 +109,7 @@ const Main = () => {
         />
       </View>
 
-      <View style={{marginBottom:60}}>
+      <View style={{}}>
         <Text
           style={{
             marginBottom: 20,
@@ -97,7 +117,6 @@ const Main = () => {
             color: '#000',
             fontSize: 16,
             fontWeight: '600',
-            
           }}>
           electronics
         </Text>
@@ -107,10 +126,18 @@ const Main = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({item, index}) => {
-            if (item.category === "electronics") {
+            if (item.category === 'electronics') {
               return (
                 <View style={{}}>
-                  <Products item={item} />
+                  <Products
+                    item={item}
+                    onAddToCart={x => {
+                      dispatch(addItemToCart(item));
+                    }}
+                    onAddWishlist={x => {
+                      dispatch(addToWishlist(item));
+                    }}
+                  />
                 </View>
               );
             }
@@ -118,7 +145,7 @@ const Main = () => {
         />
       </View>
 
-      <View style={{marginBottom:60}}>
+      <View style={{marginBottom: 80}}>
         <Text
           style={{
             marginBottom: 20,
@@ -126,9 +153,8 @@ const Main = () => {
             color: '#000',
             fontSize: 16,
             fontWeight: '600',
-            
           }}>
-          "women's clothing"
+          women's clothing
         </Text>
 
         <FlatList
@@ -136,10 +162,20 @@ const Main = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({item, index}) => {
-            if (item.category === "women's clothing") {
+            if (item?.category === "women's clothing") {
               return (
                 <View style={{}}>
-                  <Products item={item} />
+                  <Products
+                    item={item}
+                    onAddToCart={x => {
+                      dispatch(addItemToCart(item));
+                    }}
+
+                    onAddWishlist={x => {
+                      dispatch(addToWishlist(item));
+                    }}
+
+                  />
                 </View>
               );
             }
