@@ -4,7 +4,9 @@ import {createStore} from 'redux';
 import {combineReducers} from '@reduxjs/toolkit';
 import Reducers2 from '../reducers/Reducers2';
 import Reducers from '../reducers/Reducers';
-const routeReducer = combineReducers({Reducers, Reducers2});
+import AddressReducer from '../reducers/AddressReducer';
+
+const routeReducer = combineReducers({Reducers, Reducers2, AddressReducer});
 
 const store = createStore(routeReducer);
 

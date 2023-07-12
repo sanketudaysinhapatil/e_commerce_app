@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useState} from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import CartItem from '../components/CartItem';
@@ -15,7 +15,7 @@ const Wishlist = () => {
   return (
     <View style={{flex: 1}}>
       <Headerss />
-      <FlatList
+      {cartData.length >0?(<FlatList
         data={cartData}
         renderItem={({item, index}) => {
           return (
@@ -32,7 +32,14 @@ const Wishlist = () => {
             />
           );
         }}
-      />
+      />):(
+        <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+          <Image source={require("../Images/wishlist.png")} style={{width:170, height:170}}/>
+          <Text style={{color:"black", padding:15, fontWeight:"bold"}}>No Items Added In Wishlist</Text>
+        </View>
+      )}
+
+      
     </View>
   );
 };
