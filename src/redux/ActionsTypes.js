@@ -4,3 +4,5 @@ export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST"
 export const REMOVE_FROM_WISHLIST ="REMOVE_FROM_WISHLIST"
 export const ADD_ADDRESS = "ADD_ADDRESS"
 export const DELET_ADDRESS = "DELET_ADDRESS"
+export const ADD_ORDER = "ADD_ORDER";
+export const DELET_ORDER = "DELET_ORDER"

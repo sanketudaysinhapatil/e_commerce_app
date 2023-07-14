@@ -11,9 +11,9 @@ import Cart from '../bottom/Cart';
 
 const Home = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  console.log(selectedTab);
+  
   const data = useSelector(state => state);
-  console.log(data);
+ 
 
   return (
     <View style={{flex: 1}}>

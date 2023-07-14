@@ -8,6 +8,10 @@ import Home from './Screens/Home';
 import RegisterPage from './Screens/Signup';
 import MyAddress from './Screens/MyAddress';
 import AddAddress from './Screens/AddAddress';
+import Checkout from './Screens/Checkout';
+import OrderSuccess from './Screens/OrderSuccess';
+import OrderFailure from './Screens/OrderFailure';
+import Orders from './Screens/Orders';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +48,26 @@ const AppNavigator = () => {
           options={{headerShown: false}}
           name="AddAddress"
           component={AddAddress}
+        />
+         <Stack.Screen
+          options={{headerShown: false}}
+          name="Checkout"
+          component={Checkout}
+        />
+         <Stack.Screen
+          options={{headerShown: false}}
+          name="OrderSuccess"
+          component={OrderSuccess}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="OrderFailure"
+          component={OrderFailure}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Orders"
+          component={Orders}
         />
       </Stack.Navigator>
     </NavigationContainer>

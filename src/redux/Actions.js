@@ -1,4 +1,4 @@
-import { ADD_ADDRESS, ADD_TO_CART, ADD_TO_WISHLIST, DELET_ADDRESS, REMOVE_FROM_CART, REMOVE_FROM_WISHLIST } from "./ActionsTypes";
+import { ADD_ADDRESS, ADD_ORDER, ADD_TO_CART, ADD_TO_WISHLIST, DELET_ADDRESS, DELET_ORDER, REMOVE_FROM_CART, REMOVE_FROM_WISHLIST } from "./ActionsTypes";
 
 export const addItemToCart = data =>({
     type: ADD_TO_CART,
@@ -27,5 +27,15 @@ export const addAddress = data =>({
 
 export const deletAddress = index =>({
     type: DELET_ADDRESS,
+    payload :index,
+})
+
+export const addOrder = data =>({
+    type: ADD_ORDER,
+    payload :data,
+})
+
+export const deletOrder = index =>({
+    type: DELET_ORDER,
     payload :index,
 })

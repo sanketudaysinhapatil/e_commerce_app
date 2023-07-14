@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState, Keyboard} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Button,
   TouchableOpacity,
+  KeyboardAvoidingView
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch} from 'react-redux';

@@ -2,14 +2,13 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 let name = '';
 let email = '';
 let contact = '';
 
-
 const Profile = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   useEffect(() => {
     getData();
   }, []);
@@ -96,8 +95,8 @@ const Profile = () => {
           borderBottomWidth: 0.3,
           borderColor: '#8e8e8e',
         }}
-        onPress={()=>{
-          navigation.navigate("MyAddress")
+        onPress={() => {
+          navigation.navigate('MyAddress');
         }}>
         <Text style={{color: 'black'}}>My Address</Text>
       </TouchableOpacity>
@@ -109,6 +108,9 @@ const Profile = () => {
           height: 50,
           borderBottomWidth: 0.3,
           borderColor: '#8e8e8e',
+        }}
+        onPress={() => {
+          navigation.navigate('Orders');
         }}>
         <Text style={{color: 'black'}}>My Orders</Text>
       </TouchableOpacity>

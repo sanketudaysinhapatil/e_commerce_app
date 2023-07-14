@@ -24,6 +24,7 @@ const Products = ({item, onAddToCart, onAddWishlist}) => {
             height: '50%',
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
+            objectFit:"contain"
           }}
         />
         <Text

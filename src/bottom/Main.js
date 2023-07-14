@@ -1,13 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Headerss from '../components/Headerss';
-import HomeBanner from '../components/HomeBanner';
+
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 
 import ScrollImages from '../components/ScrollImages';
 import Products from '../components/Products';
 import {useDispatch, useSelector} from 'react-redux';
 import {addItemToCart, addToWishlist} from '../redux/Actions';
+import HomeBanner from '../Screens/Home/HomeBannerss';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Main = () => {
 
   useEffect(() => {
     getData();
-  });
+  },[]);
 
   const getData = () => {
     fetch('https://fakestoreapi.com/products')
@@ -34,7 +35,8 @@ const Main = () => {
   return (
     <ScrollView style={{height: '100%', paddingBottom: 100, flex: 1}}>
       <Headerss />
-      <HomeBanner />
+     
+      <HomeBanner/>
 
       <ScrollImages />
       <View style={{}}>
@@ -145,43 +147,7 @@ const Main = () => {
         />
       </View>
 
-      <View style={{marginBottom: 80}}>
-        <Text
-          style={{
-            marginBottom: 20,
-            marginLeft: 20,
-            color: '#000',
-            fontSize: 16,
-            fontWeight: '600',
-          }}>
-          women's clothing
-        </Text>
-
-        <FlatList
-          data={datas}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={({item, index}) => {
-            if (item?.category === "women's clothing") {
-              return (
-                <View style={{}}>
-                  <Products
-                    item={item}
-                    onAddToCart={x => {
-                      dispatch(addItemToCart(item));
-                    }}
-
-                    onAddWishlist={x => {
-                      dispatch(addToWishlist(item));
-                    }}
-
-                  />
-                </View>
-              );
-            }
-          }}
-        />
-      </View>
+      
     </ScrollView>
   );
 };
